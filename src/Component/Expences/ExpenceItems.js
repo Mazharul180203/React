@@ -24,7 +24,9 @@ const ExpenceItems = (props) => {
       
       <div className='expense-item__description'>
         <h2>{ props.title }</h2>
-        <div className='expense-item__price'>${props.amount}</div>
+        <div className='expense-item__price'>
+          ${props.amount}
+        </div>
       </div>
       {/* <input type='text' value={newtitle} onChange={changeHandeler}/>
       <button onClick={clickHandler}>Change Title</button> */}
