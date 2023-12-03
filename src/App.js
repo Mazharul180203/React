@@ -1,37 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NewExpence from './Component/NewExpence/NewExpence'
 import Expencess from './Component/Expences/Expencess'
 
-let DUMMY_EXPENSE = [
-  {
-    id : 'e1',
-    title : 'school fee',
-    amount : 250,
-    date : new Date(2023, 5, 12)
-  },
-  {
-    id : 'e2',
-    title : 'Books',
-    amount : 300,
-    date : new Date(2023, 5, 15)
-  },
-  {
-    id : 'e3',
-    title : 'House Rent',
-    amount : 7500,
-    date : new Date(2023, 6, 12)
-  },
-  {
-    id : 'e4',
-    title : 'Food',  
-    amount : 500,
-    date : new Date(2023, 7, 12)
-  }
-];
-
+let DUMMY_EXPENSE = [];
+  
 const App = () => {
   
   const [expenses, setExpenses] = useState(DUMMY_EXPENSE)
+
+
+  useEffect(()=>{ // for reducing multiple time rerendering 
+
+    fetch('http://127.0.0.1:5500/public/api.txt').then(
+    response => {
+      return response.json();
+    }
+  ).then(
+    data=>{
+      console.log(data)
+      setExpenses(data)
+    }
+  )
+  },[]) // in ther array the parameter is passed which we need to change again but here no changes is needed that's why it is blank 
+
+  
 
   const addExpenseHandeler = (expense) => {
     const updateExpense = [expense, ...expenses]
